@@ -1,6 +1,7 @@
 using bookingdotcom.Models;
 using bookingdotcom.Repository;
 using bookingdotcom.ViewModels;
+using MySql.Data.MySqlClient;
 
 namespace bookingdotcom.Services
 {
@@ -11,6 +12,19 @@ namespace bookingdotcom.Services
         {
             _IUserRepository = IUserRepository;
         }
+
+        public async Task<User> Login(LoginModel model)
+        {
+           var user = await _IUserRepository.GetUserByEmailPwd(model);
+           if(user!=null)
+           {
+                return user;
+           }else
+           {
+                throw new ArgumentException("Email or password is incorrect");
+           }
+        }
+
         public async Task<User> Register(UserModel model)
         {
            var userExistingByEmail = await _IUserRepository.GetUserByEmail(model.Email??"");
@@ -18,9 +32,7 @@ namespace bookingdotcom.Services
            {
                 throw new ArgumentException("Email already exists");
            }
-           Console.WriteLine("xong rui`");
            return await _IUserRepository.Create(model);
-
         }
     }
 }

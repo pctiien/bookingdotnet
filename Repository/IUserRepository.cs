@@ -8,5 +8,6 @@ namespace bookingdotcom.Repository
         Task<User?> GetUserById(int id);
         Task<User?> GetUserByEmail(string email);
         Task<User?> Create(UserModel model);
+        Task<User?> GetUserByEmailPwd(LoginModel model);
     }
 }

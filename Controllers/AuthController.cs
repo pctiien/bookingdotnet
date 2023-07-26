@@ -14,12 +14,25 @@ namespace bookingdotcom.Controllers
         {
             _IUserService = IUserServices;
         }
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(UserModel model)
         {
             try
             {
                 User? user = await _IUserService.Register(model);
+                return Ok(user);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+            try
+            {
+                var user = await _IUserService.Login(model);
                 return Ok(user);
             }
             catch (System.Exception)

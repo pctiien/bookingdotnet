@@ -6,5 +6,6 @@ namespace bookingdotcom.Services
     public interface IUserService
     {
         Task<User> Register(UserModel model);
+        Task<User> Login(LoginModel model);
     }
 }
