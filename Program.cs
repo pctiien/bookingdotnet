@@ -30,6 +30,10 @@ void ConfigServices(WebApplicationBuilder builder)
     );
     services.AddScoped<IUserRepository,UserRepository>();
     services.AddScoped<IUserService,UserService>();
+    services.AddScoped<ILocationRepository,LocationRepository>();
+    services.AddScoped<ILocationService,LocationService>();
+    services.AddScoped<IDiscountRepository,DiscountRepository>();
+    services.AddScoped<IDiscountService,DiscountService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();

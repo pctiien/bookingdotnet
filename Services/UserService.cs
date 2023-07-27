@@ -13,7 +13,7 @@ namespace bookingdotcom.Services
             _IUserRepository = IUserRepository;
         }
 
-        public async Task<User> Login(LoginModel model)
+        public async Task<User?> Login(LoginModel model)
         {
            var user = await _IUserRepository.GetUserByEmailPwd(model);
            if(user!=null)
@@ -25,7 +25,7 @@ namespace bookingdotcom.Services
            }
         }
 
-        public async Task<User> Register(UserModel model)
+        public async Task<User?> Register(UserModel model)
         {
            var userExistingByEmail = await _IUserRepository.GetUserByEmail(model.Email??"");
            if(userExistingByEmail!=null)
