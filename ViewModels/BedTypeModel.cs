@@ -7,9 +7,6 @@ namespace bookingdotcom.ViewModels
 
         [Required]
         public string BedTypeName { get; set; }="";
-
-        [Required]
-        public int RoomId { get; set; }
         
         
         public virtual RoomBedModel? RoomBed{set;get;}

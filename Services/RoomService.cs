@@ -11,9 +11,9 @@ namespace bookingdotcom.Services
         {
             _IRoomRepository = IRoomRepository;
         }
-        public async Task<Room?> CreateRoom(RoomModel model)
+        public async Task<Room?> CreateRoom(int location_id,RoomModel model)
         {
-            return await _IRoomRepository.CreateRoom(model);
+            return await _IRoomRepository.CreateRoom(location_id,model);
         }
 
     }

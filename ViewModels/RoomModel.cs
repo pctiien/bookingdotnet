@@ -10,9 +10,6 @@ namespace bookingdotcom.ViewModels
         [Required]
         public string RoomName { get; set; }="";
 
-        [Required]
-        public int LocationId { get; set; }
-
         public virtual ICollection<UnavailableDateModel?>? UnavailableDates{get;set;}
         public virtual ICollection<BedTypeModel?>? BedTypes{set;get;}
     }

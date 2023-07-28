@@ -7,8 +7,5 @@ namespace bookingdotcom.ViewModels
 
         [Required]
         public int BedQuantity { get; set; }
-
-        [Required]
-        public int BedTypeId { get; set; }
     }
 }

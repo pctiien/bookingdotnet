@@ -6,8 +6,5 @@ namespace bookingdotcom.ViewModels
     {
         [Required]
         public DateTime Unavailable_Date { get; set; }
-
-        [Required]
-        public int RoomId { get; set; }
     }
 }
