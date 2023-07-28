@@ -30,6 +30,7 @@ namespace bookingdotcom.Models
 
         public string Description { get; set; }="";
         public virtual Discount? Discount{set;get;}
+        public virtual ICollection<Rating?>? Ratings{set;get;}
 
     }
 }

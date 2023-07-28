@@ -8,6 +8,11 @@ namespace bookingdotcom.Models
         public DbSet<User> Users{set;get;}
         public DbSet<Location> Locations{set;get;}
         public DbSet<Discount> Discounts{set;get;}
+        public DbSet<Rating> Ratings{set;get;}
+        public DbSet<Room> Rooms{set;get;}
+        public DbSet<UnavailableDate> UnavailableDates{set;get;}
+        public DbSet<RoomBed> RoomBeds{set;get;}
+        public DbSet<BedType> BedTypes{set;get;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -16,6 +21,9 @@ namespace bookingdotcom.Models
             });
             modelBuilder.Entity<User>(entity=>{
                 entity.HasIndex(u=>u.Email).IsUnique();
+            });
+            modelBuilder.Entity<RoomBed>(entity=>{
+                entity.HasIndex(rb=>rb.BedTypeId).IsUnique();
             });
         }
     }

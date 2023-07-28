@@ -36,7 +36,7 @@ namespace bookingdotcom.Repository
                         || lo.LocationName.Contains(destination)
                         || lo.Address.Contains(destination)
                         || lo.Description.Contains(destination))
-                .Include(lo=>lo.Discount)
+                .Include(lo=>lo.Discount).Include(lo=>lo.Ratings)
                 .ToListAsync();
             return locations;
         }
