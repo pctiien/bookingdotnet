@@ -1,6 +1,11 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using bookingdotcom.Models;
+using bookingdotcom.Services;
 using bookingdotcom.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 
 namespace bookingdotcom.Repository
@@ -8,9 +13,13 @@ namespace bookingdotcom.Repository
     public class UserRepository : IUserRepository
     {
         private readonly BookingDbContext _dbContext ;
-        public UserRepository(BookingDbContext dbContext)
+        private readonly IConfiguration _Config;
+        private readonly ITokenService _ITokenService;
+        public UserRepository(BookingDbContext dbContext,IConfiguration Config,ITokenService ITokenService)
         {
-            _dbContext = dbContext;            
+            _dbContext = dbContext;       
+            _Config = Config;     
+            _ITokenService = ITokenService;
         }
         public async Task<User?> Create(UserModel model)
         {
@@ -40,7 +49,7 @@ namespace bookingdotcom.Repository
             return await  _dbContext.Users.FirstOrDefaultAsync(u=>u.Email == email);
         }
 
-        public async Task<User?> GetUserByEmailPwd(LoginModel model)
+        public async Task<string?> Login(LoginModel model)
         {
             string sqlQuery = "CALL Login(@Email, @Password)";
 
@@ -49,13 +58,21 @@ namespace bookingdotcom.Repository
                 new MySqlParameter("@Email", model.Email),
                 new MySqlParameter("@Password", model.Password),
             };
-            var user = await _dbContext.Users.FromSqlRaw(sqlQuery, parameters).ToListAsync();
-            return user.FirstOrDefault();
+            var result = await _dbContext.Users.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+            var user = result.FirstOrDefault();
+
+            // Generate token
+            if(user!=null)
+            {
+                var jwtToken = _ITokenService.GenerateToken(user);
+                return jwtToken;
+            }else throw new ArgumentNullException("Wrong email or password");
         }
 
         public async Task<User?> GetUserById(int id)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(user=>user.UserId ==id);
         }
+
     }
 }

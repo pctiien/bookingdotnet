@@ -13,9 +13,9 @@ namespace bookingdotcom.Services
             _IUserRepository = IUserRepository;
         }
 
-        public async Task<User?> Login(LoginModel model)
+        public async Task<string?> Login(LoginModel model)
         {
-           var user = await _IUserRepository.GetUserByEmailPwd(model);
+           var user = await _IUserRepository.Login(model);
            if(user!=null)
            {
                 return user;
