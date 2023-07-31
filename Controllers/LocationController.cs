@@ -1,3 +1,4 @@
+using bookingdotcom.Attributes;
 using bookingdotcom.Services;
 using bookingdotcom.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,7 @@ namespace bookingdotcom.Controllers
             }
         }
         [HttpPost]
+        [JwtAuthorize]
         public async Task<IActionResult> CreateLocation(LocationModel model)
         {
             try

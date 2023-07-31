@@ -28,7 +28,7 @@ namespace bookingdotcom.Repository
             return location;
         }
 
-        public async Task<List<Location?>?> FilterByDestination(string destination)
+        public async Task<List<Location>> FilterByDestination(string destination)
         {
             var locations = await _DbContext.Locations
                 .Where(lo => lo.City.Contains(destination)

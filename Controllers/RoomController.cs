@@ -1,3 +1,4 @@
+using bookingdotcom.Attributes;
 using bookingdotcom.Services;
 using bookingdotcom.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace bookingdotcom.Controllers
             _IRoomService = IRoomService;
         }
         [HttpPost("{location_id}")]
+        [JwtAuthorize]
         public async Task<IActionResult> CreateRoom(int location_id,RoomModel model)
         {
             try

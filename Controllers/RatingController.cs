@@ -1,3 +1,4 @@
+using bookingdotcom.Attributes;
 using bookingdotcom.Services;
 using bookingdotcom.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ namespace bookingdotcom.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
+    [JwtAuthorize]
     public class RatingController : ControllerBase
     {
         public IRatingService _IRatingService{set;get;}
@@ -24,6 +26,19 @@ namespace bookingdotcom.Controllers
             {
                 
                 return BadRequest();
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetRatings(int locationId)
+        {
+            try
+            {
+                var result = await _IRatingService.GetRatings(locationId);
+                return Ok(result);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest("Location Id must be a valid number");
             }
         }
     }

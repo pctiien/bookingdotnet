@@ -15,10 +15,10 @@ namespace bookingdotcom.Services
 
         public async Task<string?> Login(LoginModel model)
         {
-           var user = await _IUserRepository.Login(model);
-           if(user!=null)
+           var jwtToken = await _IUserRepository.Login(model);
+           if(jwtToken!=null)
            {
-                return user;
+                return jwtToken;
            }else
            {
                 throw new ArgumentException("Email or password is incorrect");

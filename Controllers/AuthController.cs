@@ -32,12 +32,12 @@ namespace bookingdotcom.Controllers
         {
             try
             {
-                var user = await _IUserService.Login(model);
-                return Ok(user);
+                var jwtToken = await _IUserService.Login(model);
+                return Ok(jwtToken);
             }
             catch (System.Exception)
             {
-                return BadRequest();
+                return BadRequest("Wrong email or password.");
             }
         }
     }

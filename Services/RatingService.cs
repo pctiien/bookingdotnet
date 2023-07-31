@@ -15,5 +15,11 @@ namespace bookingdotcom.Services
         {
             return await _IRatingRepository.CreateRating(model);
         }
+
+        public async Task<List<Rating>> GetRatings(int locationId)
+        {
+            var ratingsList = await _IRatingRepository.GetRatingsByLocationId(locationId);
+            return ratingsList;
+        }
     }
 }

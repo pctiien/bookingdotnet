@@ -1,45 +1,19 @@
+using bookingdotcom.Filters;
 using bookingdotcom.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace bookingdotcom.Attributes
 {
-    public class JwtAuthorizeAuttribute : Attribute, IAuthorizationFilter
+    public class JwtAuthorizeAttribute : TypeFilterAttribute
     {
-        private readonly string _role;
-        public ITokenService _ITokenService {set;get;}
-        
-        public JwtAuthorizeAuttribute(ITokenService ITokenService,string role)
+        public JwtAuthorizeAttribute(string role) : base(typeof(JwtAuthorizeFilter))
         {
-            _role = role;
-            _ITokenService = ITokenService;
+            Arguments = new object[] { role };
         }
-        public void OnAuthorization(AuthorizationFilterContext context)
+        public JwtAuthorizeAttribute() : base(typeof(JwtAuthorizeFilter))
         {
-            var jwtToken = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-            try
-            {
-                if(jwtToken==null)
-                {
-                    context.Result = new UnauthorizedResult();
-                    return;
-                }
-                if(_ITokenService.ValidateJwtToken(jwtToken,_role,out var UserId))
-                {
-                    context.HttpContext.Items["UserId"]=UserId;
-                }else
-                {
-                    context.Result = new UnauthorizedResult();
-                    return;
-                }
-            }
-            catch (System.Exception)
-            {
-                context.Result = new UnauthorizedResult();
-                return;
-            }
-
+            Arguments = new object[] {"User"};
         }
-
     }
 }

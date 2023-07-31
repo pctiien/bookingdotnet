@@ -58,7 +58,7 @@ namespace bookingdotcom.Services
 
         }
 
-        public bool ValidateJwtToken(string jwtToken, string role,out int? userId)
+        public bool ValidateJwtToken(string jwtToken, string _role,out int? userId)
         {
             userId =null;
             var claims = DecodeToken(jwtToken);
@@ -69,12 +69,19 @@ namespace bookingdotcom.Services
                 if(exp!=null&&long.TryParse(exp.Value,out long expUnixTimestamp))
                 {
                     var expDateTime = DateTimeOffset.FromUnixTimeSeconds(expUnixTimestamp).UtcDateTime;
-                    if(DateTime.Now>expDateTime) return false;
+                    if(DateTime.UtcNow>expDateTime) return false;
+                }
+                var role = claims.FindFirst(ClaimTypes.Role);
+                var roleValue = role?.Value;
+                if(roleValue!=null)
+                {
+                    if(!roleValue.ToLower().Trim().Equals(_role.ToLower().Trim())) return false;
                 }
                 var nameIden =claims.FindFirst(ClaimTypes.NameIdentifier);
                 if(nameIden!=null)
                 {
                     userId =int.Parse(nameIden.Value);
+                    Console.WriteLine($"user id : {userId}");
                 }
                 return true;
 

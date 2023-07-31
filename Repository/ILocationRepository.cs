@@ -5,7 +5,7 @@ namespace bookingdotcom.Repository
 {
     public interface ILocationRepository 
     {
-        Task<List<Location?>?> FilterByDestination(string destination);
+        Task<List<Location>> FilterByDestination(string destination);
         Task<Location?> CreateNewLocation(LocationModel model);
     }
 }

@@ -18,7 +18,6 @@ namespace bookingdotcom.ViewModels
         [Required(ErrorMessage ="City is required")]
         public string City { get; set; }="";
 
-
         public string Description { get; set; }="";
 
     }
