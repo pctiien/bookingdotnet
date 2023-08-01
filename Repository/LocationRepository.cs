@@ -69,5 +69,10 @@ namespace bookingdotcom.Repository
             var imgList = await _DbContext.LocationImages.Where(li=>li.LocationId==location_id).Select(li=>li.LocationImageUrl).ToListAsync();
             return imgList;
         }
+
+        public async Task<Location?> GetLocationById(int location_id)
+        {
+            return await _DbContext.Locations.FirstOrDefaultAsync(lo=>lo.LocationId==location_id);
+        }
     }
 }

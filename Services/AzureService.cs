@@ -58,5 +58,29 @@ namespace bookingdotcom.Services
                 return blobClient.Uri.ToString();
             }else return null;
        }
+
+        public async Task<List<string?>?> UploadRoomImages(IFormFile[] file)
+        {
+            var roomImgsList = new List<string?>();
+            if(file!=null&&file.Length>0)
+            {
+                foreach(var item in file)
+                {
+                    if(item!=null&&item.Length>0)
+                    {
+                        var filename = Guid.NewGuid().ToString()+Path.GetFileName(item.FileName);
+                        var blobPath = Path.Combine("locations","rooms",filename);
+                        BlobClient blobClient = _containerClient.GetBlobClient(blobPath);
+                        using(var stream = item.OpenReadStream())
+                        {
+                            await blobClient.UploadAsync(stream,true);
+                        }
+                        var result = blobClient.Uri.ToString();
+                        roomImgsList.Add(result);
+                    }
+                }
+            }
+            return roomImgsList;
+        }
     }
 }

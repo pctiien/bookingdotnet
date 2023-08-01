@@ -16,7 +16,7 @@ namespace bookingdotcom.Controllers
         }
         [HttpPost("{location_id}")]
         [JwtAuthorize]
-        public async Task<IActionResult> CreateRoom(int location_id,RoomModel model)
+        public async Task<IActionResult> CreateRoom(int location_id,[FromForm]RoomModel model)
         {
             try
             {

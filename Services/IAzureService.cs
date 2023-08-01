@@ -4,5 +4,6 @@ namespace bookingdotcom.Services
     {
         Task<List<string?>?> UploadLocationImages(IFormFile[] file);
         Task<string?> UploadLocationPoster(IFormFile file);
+        Task<List<string?>?> UploadRoomImages(IFormFile[] file);
     }
 }

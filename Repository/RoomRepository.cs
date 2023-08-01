@@ -1,4 +1,5 @@
 using bookingdotcom.Models;
+using bookingdotcom.Services;
 using bookingdotcom.ViewModels;
 
 namespace bookingdotcom.Repository
@@ -6,9 +7,11 @@ namespace bookingdotcom.Repository
     public class RoomRepository : IRoomRepository
     {
         private readonly BookingDbContext _DbContext;
-        public RoomRepository(BookingDbContext DbContext)
+        public IAzureService _IAzureService{set;get;}
+        public RoomRepository(BookingDbContext DbContext,IAzureService IAzureService)
         {
             _DbContext = DbContext;
+            _IAzureService = IAzureService;
         }
         public async Task<Room?> CreateRoom(int location_id,RoomModel model)
         {
@@ -21,6 +24,22 @@ namespace bookingdotcom.Repository
                 };
                 await _DbContext.Rooms.AddAsync(room);
                 await _DbContext.SaveChangesAsync();
+                if(model.RoomImages!=null)
+                {
+                    var listImgs = await _IAzureService.UploadRoomImages(model.RoomImages);
+                    if(listImgs!=null)
+                    {
+                        var listRoomImage = listImgs?.Where(li=>li!=null).Select(li=>new RoomImage {
+                        RoomImageUrl = li??"",
+                        RoomId = room.RoomId
+                        });
+                        if(listRoomImage!=null)
+                        {
+                            await _DbContext.RoomImages.AddRangeAsync(listRoomImage);
+                            await _DbContext.SaveChangesAsync();
+                        }
+                    }
+                }
                 if(model.UnavailableDates!=null)
                 {
                     // convert unavailabledatesmodel to unavailabledates

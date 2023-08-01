@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace bookingdotcom.Models
 {
@@ -24,6 +25,7 @@ namespace bookingdotcom.Models
 
     // Thuộc tính ForeignKey để xác định khóa ngoại
     [ForeignKey("RoomId")]
+    [JsonIgnore]
     public virtual Room? Room { get; set; }
 }
 }

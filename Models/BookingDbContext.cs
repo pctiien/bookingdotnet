@@ -14,6 +14,7 @@ namespace bookingdotcom.Models
         public DbSet<RoomBed> RoomBeds{set;get;}
         public DbSet<BedType> BedTypes{set;get;}
         public DbSet<LocationImage> LocationImages{set;get;}
+        public DbSet<RoomImage> RoomImages{set;get;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

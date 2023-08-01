@@ -43,7 +43,19 @@ namespace bookingdotcom.Controllers
                 return BadRequest("Couldn't get this location");
             }
         }
-
+        [HttpGet("{Location_id}")]
+        public async Task<IActionResult> GetLocationById(int location_id)
+        {
+            try
+            {
+                var location = await _ILocationService.GetLocationById(location_id);
+                return Ok(location);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest("Couldn't get this location by this id");
+            }
+        }
         
         [HttpPost]
         [JwtAuthorize]
