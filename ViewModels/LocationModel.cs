@@ -20,5 +20,9 @@ namespace bookingdotcom.ViewModels
 
         public string Description { get; set; }="";
 
+        [Required(ErrorMessage ="Poster is required")]
+        public IFormFile? Poster{set;get;}
+        public IFormFile[]? LocationImgs{set;get;}
+
     }
 }

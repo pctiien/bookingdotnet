@@ -13,6 +13,7 @@ namespace bookingdotcom.Models
         public DbSet<UnavailableDate> UnavailableDates{set;get;}
         public DbSet<RoomBed> RoomBeds{set;get;}
         public DbSet<BedType> BedTypes{set;get;}
+        public DbSet<LocationImage> LocationImages{set;get;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace bookingdotcom.Models
 {
@@ -29,8 +30,15 @@ namespace bookingdotcom.Models
         [Column("description")]
 
         public string Description { get; set; }="";
+        [Required]
+        [Column("poster")]
+        [Url]
+        public string Poster {set;get;}="";
         public virtual Discount? Discount{set;get;}
+        [JsonIgnore]
         public virtual ICollection<Rating?>? Ratings{set;get;}
+        [JsonIgnore]
+        public virtual ICollection<LocationImage?>? LocationImages{set;get;}
 
     }
 }

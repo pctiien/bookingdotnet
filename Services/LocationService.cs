@@ -22,5 +22,10 @@ namespace bookingdotcom.Services
             
             return await _ILocationRepository.FilterByDestination(destination);
         }
+
+        public async Task<List<string>> GetLocationImgList(int location_id)
+        {
+            return await _ILocationRepository.GetLocationImgList(location_id);
+        }
     }
 }

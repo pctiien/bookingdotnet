@@ -27,9 +27,27 @@ namespace bookingdotcom.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet("{location_id}/images")]
+        public async Task<IActionResult> GetLocationImgs(int location_id)
+        {
+            try
+            {
+                var listImgs = await _ILocationService.GetLocationImgList(location_id);
+                if(listImgs!=null)
+                {
+                    return Ok(listImgs);
+                }else return BadRequest("Couldn't get this location");
+            }
+            catch (System.Exception)
+            {
+                return BadRequest("Couldn't get this location");
+            }
+        }
+
+        
         [HttpPost]
         [JwtAuthorize]
-        public async Task<IActionResult> CreateLocation(LocationModel model)
+        public async Task<IActionResult> CreateLocation([FromForm]LocationModel model)
         {
             try
             {

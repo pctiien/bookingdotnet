@@ -81,7 +81,6 @@ namespace bookingdotcom.Services
                 if(nameIden!=null)
                 {
                     userId =int.Parse(nameIden.Value);
-                    Console.WriteLine($"user id : {userId}");
                 }
                 return true;
 
