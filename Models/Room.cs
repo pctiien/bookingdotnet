@@ -26,5 +26,6 @@ namespace bookingdotcom.Models
         public virtual ICollection<UnavailableDate?>? UnvailableDates{get;set;}
         public virtual ICollection<BedType?>? BedTypes{set;get;}
         public virtual ICollection<RoomImage?>? RoomImages{set;get;}
+        public virtual ICollection<RoomFacility?>? RoomFacilities{set;get;}
     }
 }

@@ -39,7 +39,7 @@ namespace bookingdotcom.Repository
                             await _DbContext.SaveChangesAsync();
                         }
                     }
-                }
+                }       
                 if(model.BedTypes!=null)
                 {
                     var bedtypes = model.BedTypes.Select(bt=>new BedType{

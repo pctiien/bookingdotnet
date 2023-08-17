@@ -8,9 +8,9 @@ namespace bookingdotcom.Models
     public class RoomFacility 
     {
         [Key]
-        [Column("roomfacilities_id")]
+        [Column("roomfacility_id")]
         public int RoomFacilityId{set;get;}
-        [Column("roomfacilities_type")]
+        [Column("roomfacility_type")]
         [Required]
         public string RoomFacilityType{set;get;}="";
         [Column("room_id")]
@@ -18,6 +18,6 @@ namespace bookingdotcom.Models
         public int RoomId{set;get;}
         [ForeignKey("RoomId")]
         [JsonIgnore]
-        public Room? Room{set;get;}
+        public virtual ICollection<Room?>? Rooms{set;get;}
     }
-}   
+}           
