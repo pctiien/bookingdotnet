@@ -28,17 +28,16 @@ namespace bookingdotcom.Models
         [Column("city")]
         public string City { get; set; }="";
         [Column("description")]
-
         public string Description { get; set; }="";
         [Required]
         [Column("poster")]
         [Url]
         public string Poster {set;get;}="";
+        [JsonIgnore]
         public virtual Discount? Discount{set;get;}
         [JsonIgnore]
         public virtual ICollection<Rating?>? Ratings{set;get;}
         [JsonIgnore]
         public virtual ICollection<LocationImage?>? LocationImages{set;get;}
-
     }
 }

@@ -74,5 +74,17 @@ namespace bookingdotcom.Repository
         {
             return await _DbContext.Locations.FirstOrDefaultAsync(lo=>lo.LocationId==location_id);
         }
+
+        public async Task<bool> DeleteLocationById(int location_id)
+        {
+            var res = await _DbContext.Locations.FirstOrDefaultAsync(lo=>lo.LocationId==location_id);
+            if(res==null) return false;
+            else
+            {
+                _DbContext.Locations.Remove(res);
+                return true;
+            }
+
+        }
     }
 }

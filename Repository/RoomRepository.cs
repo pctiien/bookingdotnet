@@ -44,7 +44,7 @@ namespace bookingdotcom.Repository
                 {
                     // convert unavailabledatesmodel to unavailabledates
                     var un_availabledate = model.UnavailableDates.Select(ud=>new UnavailableDate{
-                    Unavailable_Date = ud.Unavailable_Date,
+                    Unavailable_Date = ud?.Unavailable_Date??DateTime.MinValue,
                     RoomId = room.RoomId
                     }).ToList();
                     await _DbContext.UnavailableDates.AddRangeAsync(un_availabledate);
@@ -54,7 +54,7 @@ namespace bookingdotcom.Repository
                 {
                     var bedtypes = model.BedTypes.Select(bt=>new BedType{
                         RoomId = room.RoomId,
-                        BedTypeName = bt.BedTypeName
+                        BedTypeName = bt?.BedTypeName??""
                     }).ToList();
                         // Convert bedtypemodel to bedtype
                         await _DbContext.BedTypes.AddRangeAsync(bedtypes);

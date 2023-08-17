@@ -32,5 +32,10 @@ namespace bookingdotcom.Services
         {
             return await _ILocationRepository.GetLocationById(location_id);
         }
+
+        public async Task<bool> Delete(int location_id)
+        {
+            return await _ILocationRepository.DeleteLocationById(location_id);
+        }
     }
 }

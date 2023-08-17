@@ -9,5 +9,6 @@ namespace bookingdotcom.Services
         Task<Location?> Create(LocationModel model);
         Task<List<string>> GetLocationImgList(int location_id);
         Task<Location?> GetLocationById(int location_id);
+        Task<Boolean> Delete(int location_id);
     }
 }

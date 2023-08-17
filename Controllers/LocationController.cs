@@ -71,5 +71,22 @@ namespace bookingdotcom.Controllers
                 return BadRequest();
             }
         }
+        [HttpDelete("{location_id}")]
+        public async Task<IActionResult> Delete(int location_id)
+        {
+            try
+            {
+                var res = await _ILocationService.Delete(location_id);
+                if(res)
+                {
+                    return Ok();
+                }else return NotFound();
+
+            }
+            catch (System.Exception)
+            {
+                return BadRequest("Location id must be a valid integer");
+            }
+        }
     }
 }
