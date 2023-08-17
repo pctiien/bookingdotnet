@@ -18,14 +18,20 @@ namespace bookingdotcom.Models
 
         [Required]
         [Column("location_id")]
-        [ForeignKey("Location")]
         public int LocationId { get; set; }
+        [Required]
+        [Column("room_size")]
+        public float RoomSize{set;get;}
+        [Column("price")]
+        [Required] 
+        public float Price {set;get;}
 
         [JsonIgnore]
+        [ForeignKey("LocationId")]
         public virtual Location? Location { get; set; }
         public virtual ICollection<UnavailableDate?>? UnvailableDates{get;set;}
         public virtual ICollection<BedType?>? BedTypes{set;get;}
         public virtual ICollection<RoomImage?>? RoomImages{set;get;}
-        public virtual ICollection<RoomFacility?>? RoomFacilities{set;get;}
-    }
+        public virtual ICollection<RoomFacilityLink>? RoomFacilityLinks{set;get;}
+    }   
 }

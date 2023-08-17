@@ -1,11 +1,7 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using bookingdotcom.Models;
 using bookingdotcom.Services;
 using bookingdotcom.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 
 namespace bookingdotcom.Repository

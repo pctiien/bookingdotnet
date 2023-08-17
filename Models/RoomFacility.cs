@@ -13,11 +13,6 @@ namespace bookingdotcom.Models
         [Column("roomfacility_type")]
         [Required]
         public string RoomFacilityType{set;get;}="";
-        [Column("room_id")]
-        [Required]
-        public int RoomId{set;get;}
-        [ForeignKey("RoomId")]
-        [JsonIgnore]
-        public virtual ICollection<Room?>? Rooms{set;get;}
+        public virtual ICollection<RoomFacilityLink>? RoomFacilityLinks{set;get;}
     }
 }           

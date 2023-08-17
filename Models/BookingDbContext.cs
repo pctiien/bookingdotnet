@@ -15,6 +15,8 @@ namespace bookingdotcom.Models
         public DbSet<BedType> BedTypes{set;get;}
         public DbSet<LocationImage> LocationImages{set;get;}
         public DbSet<RoomImage> RoomImages{set;get;}
+        public DbSet<RoomFacility> RoomFacilities{set;get;}
+        public DbSet<RoomFacilityLink> RoomFacilityLinks{set;get;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,6 +28,13 @@ namespace bookingdotcom.Models
             });
             modelBuilder.Entity<RoomBed>(entity=>{
                 entity.HasIndex(rb=>rb.BedTypeId).IsUnique();
+            });
+            modelBuilder.Entity<RoomFacilityLink>(entity=>{
+                entity.HasKey(e=>new{e.RoomId,e.RoomFacilityId});
+                // entity.HasOne(e=>e.Room).WithMany(r=>r.RoomFacilityLinks)
+                //         .HasForeignKey(e=>e.RoomId);
+                // entity.HasOne(e=>e.RoomFacility).WithMany(rf=>rf.RoomFacilityLinks)
+                //         .HasForeignKey(e=>e.RoomFacilityId);
             });
         }
     }

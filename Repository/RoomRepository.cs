@@ -39,7 +39,16 @@ namespace bookingdotcom.Repository
                             await _DbContext.SaveChangesAsync();
                         }
                     }
-                }       
+                }      
+                if(model.FacilityIds!=null)
+                {
+                    var roomFacilityLinks = model.FacilityIds.Select(id=>new RoomFacilityLink {
+                        RoomId = room.RoomId,
+                        RoomFacilityId = id
+                    }).ToList();
+                    await _DbContext.RoomFacilityLinks.AddRangeAsync(roomFacilityLinks);
+                    await _DbContext.SaveChangesAsync();
+                } 
                 if(model.BedTypes!=null)
                 {
                     var bedtypes = model.BedTypes.Select(bt=>new BedType{

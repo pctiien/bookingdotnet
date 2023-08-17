@@ -53,6 +53,8 @@ namespace bookingdotcom.Repository
 
         public async Task<List<Location>> FilterByDestination(string destination)
         {
+            Console.WriteLine("kaka");
+            Console.WriteLine(_DbContext.Locations.Count().ToString());
             var locations = await _DbContext.Locations
                 .Where(lo => lo.City.Contains(destination)
                         || lo.Country.Contains(destination)
