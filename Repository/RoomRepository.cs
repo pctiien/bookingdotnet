@@ -40,16 +40,6 @@ namespace bookingdotcom.Repository
                         }
                     }
                 }
-                if(model.UnavailableDates!=null)
-                {
-                    // convert unavailabledatesmodel to unavailabledates
-                    var un_availabledate = model.UnavailableDates.Select(ud=>new UnavailableDate{
-                    Unavailable_Date = ud?.Unavailable_Date??DateTime.MinValue,
-                    RoomId = room.RoomId
-                    }).ToList();
-                    await _DbContext.UnavailableDates.AddRangeAsync(un_availabledate);
-                    await _DbContext.SaveChangesAsync();
-                }
                 if(model.BedTypes!=null)
                 {
                     var bedtypes = model.BedTypes.Select(bt=>new BedType{
