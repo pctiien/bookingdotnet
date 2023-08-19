@@ -30,7 +30,7 @@ namespace bookingdotcom.Models
         [ForeignKey("LocationId")]
         public virtual Location? Location { get; set; }
         public virtual ICollection<UnavailableDate?>? UnvailableDates{get;set;}
-        public virtual ICollection<BedType?>? BedTypes{set;get;}
+        public virtual ICollection<RoomFacilityLink?>? BedTypes{set;get;}
         public virtual ICollection<RoomImage?>? RoomImages{set;get;}
         public virtual ICollection<RoomFacilityLink>? RoomFacilityLinks{set;get;}
     }   

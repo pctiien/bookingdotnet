@@ -4,13 +4,13 @@ using System.Text.Json.Serialization;
 
 namespace bookingdotcom.Models
 {
-    [Table("room_facilities")]
-    public class RoomFacility 
+    [Table("facilities")]
+    public class Facility 
     {
         [Key]
-        [Column("roomfacility_id")]
+        [Column("facility_id")]
         public int RoomFacilityId{set;get;}
-        [Column("roomfacility_type")]
+        [Column("facility_type")]
         [Required]
         public string RoomFacilityType{set;get;}="";
         public virtual ICollection<RoomFacilityLink>? RoomFacilityLinks{set;get;}

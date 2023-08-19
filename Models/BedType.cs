@@ -23,6 +23,6 @@ namespace bookingdotcom.Models
         
         [JsonIgnore]
         public virtual Room? Room { get; set; }
-        public virtual RoomBed? RoomBed{get;set;}
+        public virtual ICollection<RoomBedTypeLink>? RoomBedTypes{set;get;}
     }
 }
