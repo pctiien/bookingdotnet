@@ -17,7 +17,7 @@ namespace bookingdotcom.Services
             return _ILocationRepository.CreateNewLocation(model);
         }
 
-        public async Task<List<Location>> GetLocation(string destination)
+        public async Task<List<Location>> GetLocation(string? destination="")
         {
             
             return await _ILocationRepository.FilterByDestination(destination);

@@ -8,6 +8,7 @@ namespace bookingdotcom.Models
     public class RoomBedTypeLink 
     {
         [DefaultValue(1)]
+        [Column("quantity")]
         public int Quantity {set;get;}
         [Column("room_id")]
         [Required]

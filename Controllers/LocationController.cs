@@ -15,7 +15,7 @@ namespace bookingdotcom.Controllers
             _ILocationService = ILocationService;
         }
         [HttpGet]
-        public async Task<IActionResult> GetLocation(string destination)
+        public async Task<IActionResult> GetLocation(string? destination="")
         {
             try
             {

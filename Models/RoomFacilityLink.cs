@@ -15,6 +15,6 @@ namespace bookingdotcom.Models
         [ForeignKey("RoomId")]
         public virtual Room? Room { get; set; }
         [ForeignKey("FacilityId")]
-        public virtual ICollection<Facility>? Facilities { get; set; }
+        public virtual Facility? Facility { get; set; }
     }
 }

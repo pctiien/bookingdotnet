@@ -11,7 +11,6 @@ namespace bookingdotcom.Models
         public DbSet<Rating> Ratings{set;get;}
         public DbSet<Room> Rooms{set;get;}
         public DbSet<UnavailableDate> UnavailableDates{set;get;}
-        public DbSet<RoomBed> RoomBeds{set;get;}
         public DbSet<BedType> BedTypes{set;get;}
         public DbSet<LocationImage> LocationImages{set;get;}
         public DbSet<RoomImage> RoomImages{set;get;}
@@ -27,11 +26,8 @@ namespace bookingdotcom.Models
             modelBuilder.Entity<User>(entity=>{
                 entity.HasIndex(u=>u.Email).IsUnique();
             });
-            modelBuilder.Entity<RoomBed>(entity=>{
-                entity.HasIndex(rb=>rb.BedTypeId).IsUnique();
-            });
             modelBuilder.Entity<RoomFacilityLink>(entity=>{
-                entity.HasKey(e=>new{e.RoomId,e.Facilities});
+                entity.HasKey(e=>new{e.RoomId,e.FacilityId});
             });
             modelBuilder.Entity<RoomBedTypeLink>(entity=>{
                 entity.HasKey(e=>new{e.BedTypeId,e.RoomId});

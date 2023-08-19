@@ -14,8 +14,10 @@ namespace bookingdotcom.Repository
         public async Task<Rating?> CreateRating(RatingModel model)
         {
             var rating = new Rating{
+                UserId = model.UserId,
+                RatingDate = DateTime.Now,
                 Score = model.Score,
-                Review = model.Review,
+                Comment = model.Review,
                 LocationId = model.LocationId
             };
             await _DbContext.Ratings.AddAsync(rating);

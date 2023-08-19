@@ -4,6 +4,8 @@ namespace bookingdotcom.ViewModels
 {
     public class RatingModel
     {
+        [Required]
+        public int UserId{set;get;}
 
         [Required]
         public string Review { get; set; }="";

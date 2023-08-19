@@ -44,7 +44,7 @@ namespace bookingdotcom.Repository
                 {
                     var roomFacilityLinks = model.FacilityIds.Select(id=>new RoomFacilityLink {
                         RoomId = room.RoomId,
-                        RoomFacilityId = id
+                        FacilityId = id
                     }).ToList();
                     await _DbContext.RoomFacilityLinks.AddRangeAsync(roomFacilityLinks);
                     await _DbContext.SaveChangesAsync();
@@ -55,24 +55,9 @@ namespace bookingdotcom.Repository
                         RoomId = room.RoomId,
                         BedTypeName = bt?.BedTypeName??""
                     }).ToList();
-                        // Convert bedtypemodel to bedtype
                         await _DbContext.BedTypes.AddRangeAsync(bedtypes);
                         await _DbContext.SaveChangesAsync();
-                    var btlist = bedtypes;
-                    var index =0;
-                    foreach(var rb in model.BedTypes)
-                    {
-                        if(rb!=null&&rb.RoomBed!=null)
-                        {
-                            var roombed = new RoomBed{
-                            BedQuantity = rb.RoomBed.BedQuantity,
-                            BedTypeId = btlist[index++].BedTypeId
-                            };
-                            // Convert roombedmodel to roombed
-                            await _DbContext.RoomBeds.AddAsync(roombed);
-                            await _DbContext.SaveChangesAsync();
-                        }
-                    }
+                    var btlist = bedtypes;    
                 }
                 return room;
             }else
