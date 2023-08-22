@@ -14,13 +14,13 @@ namespace bookingdotcom.Controllers
         {
             _IRoomService = IRoomService;
         }
-        [HttpPost("{location_id}")]
+        [HttpPost]
         [JwtAuthorize]
-        public async Task<IActionResult> CreateRoom(int location_id,[FromForm]RoomModel model)
+        public async Task<IActionResult> CreateRoom([FromForm]RoomModel model)
         {
             try
             {
-                var room = await _IRoomService.CreateRoom(location_id,model);
+                var room = await _IRoomService.CreateRoom(model);
                 return Ok(room);
             }
             catch (System.Exception)

@@ -12,11 +12,6 @@ namespace bookingdotcom.Models
         public int RoomId { get; set; }
 
         [Required]
-        [Column("room_name")]
-        [MaxLength(100)]
-        public string RoomName { get; set; }="";
-
-        [Required]
         [Column("location_id")]
         public int LocationId { get; set; }
         [Required]
@@ -25,12 +20,16 @@ namespace bookingdotcom.Models
         [Column("price")]
         [Required] 
         public float Price {set;get;}
+        [Column("roomtype_id")]
+        [Required]
+        public int RoomTypeId {set;get;}
+        [ForeignKey("RoomTypeId")]
+        public virtual RoomType? RoomType{set;get;}
 
         [JsonIgnore]
         [ForeignKey("LocationId")]
         public virtual Location? Location { get; set; }
         public virtual ICollection<UnavailableDate?>? UnvailableDates{get;set;}
-        public virtual ICollection<RoomImage?>? RoomImages{set;get;}
         public virtual ICollection<RoomFacilityLink>? RoomFacilityLinks{set;get;}
     }   
 }

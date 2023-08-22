@@ -42,6 +42,8 @@ void ConfigServices(WebApplicationBuilder builder)
     services.AddScoped<IRoomService,RoomService>();
     services.AddScoped<ITokenService,TokenService>();
     services.AddScoped<IAzureService,AzureService>();
+    services.AddScoped<IRoomTypeRepository,RoomTypeRepository>();
+    services.AddScoped<IRoomTypeService,RoomTypeService>();
      // Cấu hình đọc cấu hình từ appsettings.json
     var configuration = builder.Configuration.GetSection("AppSettings");
     var key = Encoding.UTF8.GetBytes(configuration.GetSection("SecretKey").Value??"");

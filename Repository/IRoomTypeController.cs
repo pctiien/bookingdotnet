@@ -3,8 +3,8 @@ using bookingdotcom.ViewModels;
 
 namespace bookingdotcom.Repository
 {
-    public interface IRoomRepository 
+    public interface IRoomTypeRepository
     {
-        Task<Room?> CreateRoom(RoomModel model);
+        Task<RoomType?> CreateRoomType(RoomTypeModel model);
     }
 }

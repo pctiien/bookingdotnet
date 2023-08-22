@@ -13,33 +13,19 @@ namespace bookingdotcom.Repository
             _DbContext = DbContext;
             _IAzureService = IAzureService;
         }
-        public async Task<Room?> CreateRoom(int location_id,RoomModel model)
+        public async Task<Room?> CreateRoom(RoomModel model)
         {
             if(model!=null)
             {
                 // Convert roommodel to room
                 var room = new Room{
-                LocationId = location_id,
-                RoomName = model.RoomName,
+                RoomSize = model.RoomSize,
+                Price = model.Price,
+                LocationId = model.LocationId,
+                RoomTypeId = model.RoomTypeId
                 };
                 await _DbContext.Rooms.AddAsync(room);
-                await _DbContext.SaveChangesAsync();
-                if(model.RoomImages!=null)
-                {
-                    var listImgs = await _IAzureService.UploadRoomImages(model.RoomImages);
-                    if(listImgs!=null)
-                    {
-                        var listRoomImage = listImgs?.Where(li=>li!=null).Select(li=>new RoomImage {
-                        RoomImageUrl = li??"",
-                        RoomId = room.RoomId
-                        });
-                        if(listRoomImage!=null)
-                        {
-                            await _DbContext.RoomImages.AddRangeAsync(listRoomImage);
-                            await _DbContext.SaveChangesAsync();
-                        }
-                    }
-                }      
+                await _DbContext.SaveChangesAsync();     
                 if(model.FacilityIds!=null)
                 {
                     var roomFacilityLinks = model.FacilityIds.Select(id=>new RoomFacilityLink {

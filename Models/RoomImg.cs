@@ -4,28 +4,28 @@ using System.Text.Json.Serialization;
 
 namespace bookingdotcom.Models
 {
-    [Table("room_images")]
-    public class RoomImage
+    [Table("room_imgs")]
+    public class RoomImg
 {
     // Khóa chính được tự động sinh khi thêm mới bản ghi
     [Key]
-    [Column("roomimage_id")]
+    [Column("roomimg_id")]
     public int RoomImageId { get; set; }
 
     // URL của ảnh phòng (sử dụng kiểu dữ liệu TEXT)
     [Required]
     [Url]
-    [Column("roomimage_url")]
+    [Column("roomimg_url")]
     public string RoomImageUrl { get; set; }="";
 
     // Khóa ngoại liên kết với bảng 'rooms'
     [Required]
-    [Column("room_id")]
-    public int RoomId { get; set; }
+    [Column("roomtype_id")]
+    public int RoomTypeId { get; set; }
 
     // Thuộc tính ForeignKey để xác định khóa ngoại
-    [ForeignKey("RoomId")]
+    [ForeignKey("RoomTypeId")]
     [JsonIgnore]
-    public virtual Room? Room { get; set; }
+    public virtual RoomType? RoomType { get; set; }
 }
 }

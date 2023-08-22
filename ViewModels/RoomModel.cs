@@ -7,11 +7,10 @@
         public class RoomModel
         {
 
-            [Required]
-            public string RoomName { get; set; }="";
             public float RoomSize{set;get;}
             public float Price{set;get;}
-            public IFormFile[]? RoomImages{set;get;}
+            public int LocationId{set;get;}
+            public int RoomTypeId{set;get;}
             public virtual ICollection<BedTypeModel?>? BedTypes{set;get;}
             public virtual ICollection<int>? FacilityIds{set;get;}
         }
