@@ -4,8 +4,7 @@ namespace bookingdotcom.Services
 {
     public class AzureService : IAzureService
     {
-        private readonly IConfiguration? _config ;
-        string containerName = "containerkaka";
+        string containerName = "containerbooking";
         public BlobServiceClient _blogServiceClient{set;get;}
         public BlobContainerClient _containerClient{set;get;}
         public AzureService(IConfiguration config)

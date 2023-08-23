@@ -1,8 +1,11 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using bookingdotcom.Models;
+using bookingdotcom.RequestModels;
+using bookingdotcom.ResponseModels;
 using bookingdotcom.Services;
 using bookingdotcom.ViewModels;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
 
 namespace bookingdotcom.Repository
@@ -51,18 +54,26 @@ namespace bookingdotcom.Repository
             return location;
         }
 
-        public async Task<List<Location>> FilterByDestination(string? destination)
+        public async Task<List<LocationResponseModel>?> FilterByDestination(LocationRequestModel model)
         {
-            if(String.IsNullOrEmpty(destination)) destination ="";
-            var locations = await _DbContext.Locations
-                .Where(lo => lo.City.Contains(destination)
-                        || lo.Country.Contains(destination)
-                        || lo.LocationName.Contains(destination)
-                        || lo.Address.Contains(destination)
-                        || lo.Description.Contains(destination))
-                .Include(lo=>lo.Discount).Include(lo=>lo.Ratings)
-                .ToListAsync();
-            return locations;
+                var result = await _DbContext.Locations.Include(l=>l.RoomTypes).Include(l=>l.Rooms)
+                .Where(lo => lo.City.Contains(model.Destination)
+                        || lo.Country.Contains(model.Destination)
+                        || lo.LocationName.Contains(model.Destination)
+                        || lo.Address.Contains(model.Destination)
+                        || lo.Description.Contains(model.Destination))
+                .Where(l =>l.RoomTypes!=null&& l.RoomTypes.Any(rt =>rt!=null&& rt.MaxOccupancy > model.AdultQuantity))
+                .Select(l=>new LocationResponseModel{
+                            LocationId = l.LocationId,
+                            Country = l.Country,
+                            City = l.City,
+                            Description = l.Description,
+                            Discount = l.Discount!=null?l.Discount.DiscountAmount:0,
+                            Poster = l.Poster,
+                            Rating = l.Ratings!.Average(r=>r!=null?r.Score:0)
+                        }).ToListAsync();
+
+                return result;
         }
 
         public async Task<List<string>> GetLocationImgList(int location_id)

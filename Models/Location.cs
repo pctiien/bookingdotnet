@@ -39,5 +39,7 @@ namespace bookingdotcom.Models
         public virtual ICollection<Rating?>? Ratings{set;get;}
         [JsonIgnore]
         public virtual ICollection<LocationImage?>? LocationImages{set;get;}
+        public virtual ICollection<RoomType?>? RoomTypes{set;get;}
+        public virtual ICollection<Room?>? Rooms{set;get;}
     }
 }

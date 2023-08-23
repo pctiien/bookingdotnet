@@ -1,4 +1,5 @@
 using bookingdotcom.Attributes;
+using bookingdotcom.RequestModels;
 using bookingdotcom.Services;
 using bookingdotcom.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +16,11 @@ namespace bookingdotcom.Controllers
             _ILocationService = ILocationService;
         }
         [HttpGet]
-        public async Task<IActionResult> GetLocation(string? destination="")
+        public async Task<IActionResult> GetLocation(LocationRequestModel model)
         {
             try
             {
-                var locations = await _ILocationService.GetLocation(destination);
+                var locations = await _ILocationService.GetLocation(model);
                 return Ok(locations);
             }
             catch (System.Exception)
@@ -58,7 +59,7 @@ namespace bookingdotcom.Controllers
         }
         
         [HttpPost]
-        [JwtAuthorize]
+      //  [JwtAuthorize]
         public async Task<IActionResult> CreateLocation([FromForm]LocationModel model)
         {
             try

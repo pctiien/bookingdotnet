@@ -1,5 +1,7 @@
 using bookingdotcom.Models;
 using bookingdotcom.Repository;
+using bookingdotcom.RequestModels;
+using bookingdotcom.ResponseModels;
 using bookingdotcom.ViewModels;
 
 namespace bookingdotcom.Services
@@ -17,10 +19,10 @@ namespace bookingdotcom.Services
             return _ILocationRepository.CreateNewLocation(model);
         }
 
-        public async Task<List<Location>> GetLocation(string? destination="")
+        public async Task<List<LocationResponseModel>?> GetLocation(LocationRequestModel model)
         {
             
-            return await _ILocationRepository.FilterByDestination(destination);
+            return await _ILocationRepository.FilterByDestination(model);
         }
 
         public async Task<List<string>> GetLocationImgList(int location_id)
