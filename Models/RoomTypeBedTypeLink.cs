@@ -4,22 +4,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bookingdotcom.Models
 {
-    [Table("room_bedtype_links")]
-    public class RoomBedTypeLink 
+    [Table("roomtype_bedtype_links")]
+    public class RoomTypeBedTypeLink 
     {
         [DefaultValue(1)]
         [Column("quantity")]
         public int Quantity {set;get;}
-        [Column("room_id")]
+        [Column("roomtype_id")]
         [Required]
-        public int RoomId {set;get;}
+        public int RoomTypeId {set;get;}
         [Column("bedtype_id")]
         [Required]
         public int BedTypeId{set;get;}
-        [ForeignKey("RoomId")]
-        public virtual Room? Room{set;get;}
         [ForeignKey("BedTypeId")]
         public virtual BedType? BedType{set;get;}
+        [ForeignKey("RoomTypeId")]
+        public virtual RoomType? RoomType{set;get;}
 
     }
 }

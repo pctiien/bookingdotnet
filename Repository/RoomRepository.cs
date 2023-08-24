@@ -35,16 +35,6 @@ namespace bookingdotcom.Repository
                     await _DbContext.RoomFacilityLinks.AddRangeAsync(roomFacilityLinks);
                     await _DbContext.SaveChangesAsync();
                 } 
-                if(model.BedTypes!=null)
-                {
-                    var bedtypes = model.BedTypes.Select(bt=>new BedType{
-                        RoomId = room.RoomId,
-                        BedTypeName = bt?.BedTypeName??""
-                    }).ToList();
-                        await _DbContext.BedTypes.AddRangeAsync(bedtypes);
-                        await _DbContext.SaveChangesAsync();
-                    var btlist = bedtypes;    
-                }
                 return room;
             }else
             {

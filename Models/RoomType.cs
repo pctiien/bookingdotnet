@@ -24,5 +24,6 @@
                 [ForeignKey("RoomTypeNameId")]
                 public virtual RoomTypeName? RoomTypeName{set;get;}
                 public virtual ICollection<RoomImg>? RoomImages{set;get;}
+                public virtual ICollection<RoomTypeBedTypeLink>? RoomTypeBeds{set;get;}
             }
         }

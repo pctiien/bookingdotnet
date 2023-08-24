@@ -64,13 +64,21 @@ namespace bookingdotcom.Repository
                         || lo.Description.Contains(model.Destination))
                 .Where(l =>l.RoomTypes!=null&& l.RoomTypes.Any(rt =>rt!=null&& rt.MaxOccupancy > model.AdultQuantity))
                 .Select(l=>new LocationResponseModel{
+                            Address = l.Address,
                             LocationId = l.LocationId,
                             Country = l.Country,
                             City = l.City,
                             Description = l.Description,
                             Discount = l.Discount!=null?l.Discount.DiscountAmount:0,
                             Poster = l.Poster,
-                            Rating = l.Ratings!.Average(r=>r!=null?r.Score:0)
+                            Rating = l.Ratings!.Count()>0?l.Ratings!.Average(r=>r!=null?r.Score:0):0,
+                            RatingQuantity = l.Ratings!.Count,
+                            Price = l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!=null? 
+                                    l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!.Price:0,
+                            RoomType = l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!=null?
+                                        l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!.RoomType!.RoomTypeName!.Room_TypeName:"",
+                            BedType = l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!=null?
+                                        l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!.RoomType!.RoomTypeBeds!.First()!.BedType!.BedTypeName:""
                         }).ToListAsync();
 
                 return result;

@@ -11,7 +11,6 @@
             public float Price{set;get;}
             public int LocationId{set;get;}
             public int RoomTypeId{set;get;}
-            public virtual ICollection<BedTypeModel?>? BedTypes{set;get;}
             public virtual ICollection<int>? FacilityIds{set;get;}
         }
     }

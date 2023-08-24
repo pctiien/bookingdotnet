@@ -15,14 +15,7 @@ namespace bookingdotcom.Models
         [Column("bedtype_name")]
         [MaxLength(50)]
         public string BedTypeName { get; set; }="";
-
-        [Column("room_id")]
-        [ForeignKey("Room")]
-        [Required]
-        public int RoomId { get; set; }
         
-        [JsonIgnore]
-        public virtual Room? Room { get; set; }
-        public virtual ICollection<RoomBedTypeLink>? RoomBedTypes{set;get;}
+        public virtual ICollection<RoomTypeBedTypeLink>? RoomTypeBeds{set;get;}
     }
 }
