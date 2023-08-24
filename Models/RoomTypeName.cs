@@ -9,6 +9,7 @@ namespace bookingdotcom.Models
     {
         [Column("roomtypename_id")]
         [Key]
+        [JsonIgnore]
         public int RoomTypeNameId{set;get;}
         [Column("roomtypename")]        
         [Required]

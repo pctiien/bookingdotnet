@@ -14,15 +14,18 @@
                 public int MaxOccupancy{set;get;}
                 [Column("location_id")]
                 [Required]
+                [JsonIgnore]
                 public int LocationId{set;get;}
                 [Column("roomtypename_id")]
                 [Required]
+                [JsonIgnore]
                 public int RoomTypeNameId{set;get;}
                 [ForeignKey("LocationId")]
                 [JsonIgnore]
                 public virtual Location? Location{set;get;}
                 [ForeignKey("RoomTypeNameId")]
                 public virtual RoomTypeName? RoomTypeName{set;get;}
+                [JsonIgnore]
                 public virtual ICollection<RoomImg>? RoomImages{set;get;}
                 public virtual ICollection<RoomTypeBedTypeLink>? RoomTypeBeds{set;get;}
             }

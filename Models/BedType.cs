@@ -9,13 +9,14 @@ namespace bookingdotcom.Models
     {
         [Key]
         [Column("bedtype_id")]
+        [JsonIgnore]
         public int BedTypeId { get; set; }
 
         [Required]
         [Column("bedtype_name")]
         [MaxLength(50)]
         public string BedTypeName { get; set; }="";
-        
+        [JsonIgnore]
         public virtual ICollection<RoomTypeBedTypeLink>? RoomTypeBeds{set;get;}
     }
 }

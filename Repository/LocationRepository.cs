@@ -56,6 +56,7 @@ namespace bookingdotcom.Repository
 
         public async Task<List<LocationResponseModel>?> FilterByDestination(LocationRequestModel model)
         {
+            Console.WriteLine("access successfully");
                 var result = await _DbContext.Locations.Include(l=>l.RoomTypes).Include(l=>l.Rooms)
                 .Where(lo => lo.City.Contains(model.Destination)
                         || lo.Country.Contains(model.Destination)
@@ -73,14 +74,8 @@ namespace bookingdotcom.Repository
                             Poster = l.Poster,
                             Rating = l.Ratings!.Count()>0?l.Ratings!.Average(r=>r!=null?r.Score:0):0,
                             RatingQuantity = l.Ratings!.Count,
-                            Price = l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!=null? 
-                                    l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!.Price:0,
-                            RoomType = l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!=null?
-                                        l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!.RoomType!.RoomTypeName!.Room_TypeName:"",
-                            BedType = l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!=null?
-                                        l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)!.RoomType!.RoomTypeBeds!.First()!.BedType!.BedTypeName:""
-                        }).ToListAsync();
-
+                            Room = l.Rooms!.FirstOrDefault(r=>r!=null&&r.RoomType!=null&&r.RoomType.MaxOccupancy>=model.AdultQuantity)
+                            }).ToListAsync();
                 return result;
         }
 

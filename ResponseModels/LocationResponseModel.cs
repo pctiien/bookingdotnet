@@ -1,3 +1,5 @@
+using bookingdotcom.Models;
+
 namespace bookingdotcom.ResponseModels
 {
     public class LocationResponseModel
@@ -15,9 +17,7 @@ namespace bookingdotcom.ResponseModels
         public float Rating{set;get;} = 0;
         public decimal Discount {set;get;}=0;
         public int RatingQuantity{set;get;}=0;
-        public float Price{set;get;}=0;
-        public string RoomType{set;get;}="";
-        public string BedType{set;get;}="";
+        public Room? Room{set;get;}
         
     }
 }
