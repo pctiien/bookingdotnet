@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace bookingdotcom.Controllers
 {
     [ApiController]
-    [Route("api/[Controller]")]
+    [Route("api/Location/Ratings")]
     public class RatingController : ControllerBase
     {
         public IRatingService _IRatingService{set;get;}
