@@ -28,8 +28,8 @@ namespace bookingdotcom.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("{location_id}/images")]
-        public async Task<IActionResult> GetLocationImgs(int location_id)
+        [HttpGet("Images")]
+        public async Task<IActionResult> GetLocationImgs([FromQuery]int location_id)
         {
             try
             {

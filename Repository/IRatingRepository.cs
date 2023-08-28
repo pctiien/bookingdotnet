@@ -1,4 +1,5 @@
 using bookingdotcom.Models;
+using bookingdotcom.ResponseModels;
 using bookingdotcom.ViewModels;
 
 namespace bookingdotcom.Repository
@@ -6,6 +7,6 @@ namespace bookingdotcom.Repository
     public interface IRatingRepository 
     {
         Task<Rating?> CreateRating(RatingModel model);
-        Task<List<Rating>> GetRatingsByLocationId(int locationId);
+        Task<List<RatingResponseModel>> GetRatingsByLocationId(int locationId);
     }
 }

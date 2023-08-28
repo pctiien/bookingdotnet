@@ -1,4 +1,5 @@
 using bookingdotcom.Models;
+using bookingdotcom.ResponseModels;
 using bookingdotcom.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,9 +26,16 @@ namespace bookingdotcom.Repository
             return rating;
         }
 
-        public async Task<List<Rating>> GetRatingsByLocationId(int locationId)
+        public async Task<List<RatingResponseModel>> GetRatingsByLocationId(int locationId)
         {
-            List<Rating> result = await _DbContext.Ratings.Where(r=>r.LocationId == locationId).ToListAsync();
+            var result = await _DbContext.Ratings.Where(r=>r.LocationId == locationId)
+                                    .Select(r=>new RatingResponseModel{
+                                        RatingId = r.RatingId,
+                                        Comment = r.Comment,
+                                        UserName = r.User!.DisplayName??"",
+                                        UserCountry = r.User.Country??"",
+                                        UserAvatar = ""
+                                    }).ToListAsync();
             return result;
         }
     }

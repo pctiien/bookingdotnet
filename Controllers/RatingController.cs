@@ -7,7 +7,6 @@ namespace bookingdotcom.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
-    [JwtAuthorize]
     public class RatingController : ControllerBase
     {
         public IRatingService _IRatingService{set;get;}

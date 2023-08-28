@@ -1,4 +1,5 @@
 using bookingdotcom.Models;
+using bookingdotcom.ResponseModels;
 using bookingdotcom.ViewModels;
 
 namespace bookingdotcom.Services
@@ -6,6 +7,6 @@ namespace bookingdotcom.Services
     public interface IRatingService
     {
         Task<Rating?> CreateRating(RatingModel model);
-        Task<List<Rating>> GetRatings(int locationId);
+        Task<List<RatingResponseModel>> GetRatings(int locationId);
     }
 }
