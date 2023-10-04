@@ -56,7 +56,6 @@ namespace bookingdotcom.Repository
 
         public async Task<List<LocationResponseModel>?> FilterByDestination(LocationRequestModel model)
         {
-            Console.WriteLine("access successfully");
                 var result = await _DbContext.Locations.Include(l=>l.RoomTypes).Include(l=>l.Rooms)
                 .Where(lo => lo.City.Contains(model.Destination)
                         || lo.Country.Contains(model.Destination)
@@ -65,6 +64,7 @@ namespace bookingdotcom.Repository
                         || lo.Description.Contains(model.Destination))
                 .Where(l =>l.RoomTypes!=null&& l.RoomTypes.Any(rt =>rt!=null&& rt.MaxOccupancy > model.AdultQuantity))
                 .Select(l=>new LocationResponseModel{
+                            LocationName = l.LocationName,
                             Address = l.Address,
                             LocationId = l.LocationId,
                             Country = l.Country,
@@ -81,7 +81,7 @@ namespace bookingdotcom.Repository
 
         public async Task<List<string>> GetLocationImgList(int location_id)
         {
-            var imgList = await _DbContext.LocationImages.Where(li=>li.LocationId==location_id).Select(li=>li.LocationImageUrl).ToListAsync();
+            var imgList = await _DbContext.LocationImages.Where(li=>li.LocationId==location_id).Select(li=>li.LocationImageUrl).Take(5).ToListAsync();
             return imgList;
         }
 

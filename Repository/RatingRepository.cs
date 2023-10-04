@@ -35,7 +35,7 @@ namespace bookingdotcom.Repository
                                         UserName = r.User!.DisplayName??"",
                                         UserCountry = r.User.Country??"",
                                         UserAvatar = ""
-                                    }).ToListAsync();
+                                    }).Take(5).ToListAsync();
             return result;
         }
     }
